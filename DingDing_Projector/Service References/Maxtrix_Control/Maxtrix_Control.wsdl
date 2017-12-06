@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="Maxtrix_Manage">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="maxtrixType" type="tns:MaxtrixType" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:simpleType name="MaxtrixType">
+        <s:restriction base="s:string">
+          <s:enumeration value="maxtrix1" />
+          <s:enumeration value="maxtrix2" />
+          <s:enumeration value="maxtrix3" />
+          <s:enumeration value="maxtrix4" />
+          <s:enumeration value="maxtrix5" />
+          <s:enumeration value="maxtrix6" />
+          <s:enumeration value="maxtrix7" />
+          <s:enumeration value="maxtrix8" />
+          <s:enumeration value="maxtrix9" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="Maxtrix_ManageResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Maxtrix_ManageResult" type="tns:ReturnDataBase" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ReturnDataBase">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Method" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="InnerError" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ServerError" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Return_Param" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ReturnDataBase" nillable="true" type="tns:ReturnDataBase" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="Maxtrix_ManageSoapIn">
+    <wsdl:part name="parameters" element="tns:Maxtrix_Manage" />
+  </wsdl:message>
+  <wsdl:message name="Maxtrix_ManageSoapOut">
+    <wsdl:part name="parameters" element="tns:Maxtrix_ManageResponse" />
+  </wsdl:message>
+  <wsdl:message name="Maxtrix_ManageHttpGetIn">
+    <wsdl:part name="maxtrixType" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Maxtrix_ManageHttpGetOut">
+    <wsdl:part name="Body" element="tns:ReturnDataBase" />
+  </wsdl:message>
+  <wsdl:message name="Maxtrix_ManageHttpPostIn">
+    <wsdl:part name="maxtrixType" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="Maxtrix_ManageHttpPostOut">
+    <wsdl:part name="Body" element="tns:ReturnDataBase" />
+  </wsdl:message>
+  <wsdl:portType name="Maxtrix_ControlSoap">
+    <wsdl:operation name="Maxtrix_Manage">
+      <wsdl:input message="tns:Maxtrix_ManageSoapIn" />
+      <wsdl:output message="tns:Maxtrix_ManageSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="Maxtrix_ControlHttpGet">
+    <wsdl:operation name="Maxtrix_Manage">
+      <wsdl:input message="tns:Maxtrix_ManageHttpGetIn" />
+      <wsdl:output message="tns:Maxtrix_ManageHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="Maxtrix_ControlHttpPost">
+    <wsdl:operation name="Maxtrix_Manage">
+      <wsdl:input message="tns:Maxtrix_ManageHttpPostIn" />
+      <wsdl:output message="tns:Maxtrix_ManageHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="Maxtrix_ControlSoap" type="tns:Maxtrix_ControlSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Maxtrix_Manage">
+      <soap:operation soapAction="http://tempuri.org/Maxtrix_Manage" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="Maxtrix_ControlSoap12" type="tns:Maxtrix_ControlSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Maxtrix_Manage">
+      <soap12:operation soapAction="http://tempuri.org/Maxtrix_Manage" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="Maxtrix_ControlHttpGet" type="tns:Maxtrix_ControlHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="Maxtrix_Manage">
+      <http:operation location="/Maxtrix_Manage" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="Maxtrix_ControlHttpPost" type="tns:Maxtrix_ControlHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="Maxtrix_Manage">
+      <http:operation location="/Maxtrix_Manage" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Maxtrix_Control">
+    <wsdl:port name="Maxtrix_ControlSoap" binding="tns:Maxtrix_ControlSoap">
+      <soap:address location="http://192.168.1.235/Maxtrix_Control.asmx" />
+    </wsdl:port>
+    <wsdl:port name="Maxtrix_ControlSoap12" binding="tns:Maxtrix_ControlSoap12">
+      <soap12:address location="http://192.168.1.235/Maxtrix_Control.asmx" />
+    </wsdl:port>
+    <wsdl:port name="Maxtrix_ControlHttpGet" binding="tns:Maxtrix_ControlHttpGet">
+      <http:address location="http://192.168.1.235/Maxtrix_Control.asmx" />
+    </wsdl:port>
+    <wsdl:port name="Maxtrix_ControlHttpPost" binding="tns:Maxtrix_ControlHttpPost">
+      <http:address location="http://192.168.1.235/Maxtrix_Control.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
